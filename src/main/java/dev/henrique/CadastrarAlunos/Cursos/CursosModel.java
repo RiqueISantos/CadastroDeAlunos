@@ -1,5 +1,7 @@
 package dev.henrique.CadastrarAlunos.Cursos;
 
+import dev.henrique.CadastrarAlunos.Alunos.AlunosModel;
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,8 +9,14 @@ import jakarta.persistence.*;
 public class CursosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String nome;
-    int cargaHoraria;
+    private Long id;
+
+    private String nome;
+
+    private int cargaHoraria;
+
+    // Um curso pode ter varios alunos matriculados
+    @OneToMany(mappedBy = "cursos")
+    private List<AlunosModel> alunos;
 
 }

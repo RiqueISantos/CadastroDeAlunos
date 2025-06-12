@@ -2,16 +2,22 @@ package dev.henrique.CadastrarAlunos.Alunos;
 
 import dev.henrique.CadastrarAlunos.Cursos.CursosModel;
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_alunos")
 public class AlunosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String nome;
-    String email;
-    int idade;
-    List<CursosModel> cursos;
+    private Long id;
+
+    private String nome;
+
+    private String email;
+
+    private int idade;
+
+    // Um aluno esta matriculado em um unico curso
+    @ManyToOne
+    @JoinColumn(name = "cursos_id")
+    private CursosModel cursos;
 }
