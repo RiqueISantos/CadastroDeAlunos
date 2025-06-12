@@ -2,9 +2,15 @@ package dev.henrique.CadastrarAlunos.Alunos;
 
 import dev.henrique.CadastrarAlunos.Cursos.CursosModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_alunos")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AlunosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
