@@ -14,21 +14,25 @@ import lombok.NoArgsConstructor;
 public class AlunosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, name = "nome",length = 100)
     private String nome;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, name = "email", nullable = false)
     private String email;
 
+    @Column(name = "idade")
     private int idade;
 
+    @Column(name = "endereco")
     private String endereco;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "cpf")
     private String cpf;
 
+    @Column(name = "telefone")
     private String telefone;
 
     // Um aluno esta matriculado em um unico curso

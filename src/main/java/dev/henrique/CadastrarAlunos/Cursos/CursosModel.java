@@ -17,19 +17,25 @@ import lombok.NoArgsConstructor;
 public class CursosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, name = "nome", length = 100)
     private String nome;
 
+    @Column(name = "carga_horaria")
     private int cargaHoraria;
 
+    @Column(name = "valor")
     private double valor;
 
+    @Column(name = "modalidade")
     private String modalidade;
 
+    @Column(name = "data_inicio")
     private LocalDate dataInicio;
 
+    @Column(name = "data_fim")
     private LocalDate dataFim;
 
     // Um curso pode ter varios alunos matriculados
