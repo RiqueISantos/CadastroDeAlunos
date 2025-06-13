@@ -16,12 +16,20 @@ public class AlunosModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     private int idade;
+
+    private String endereco;
+
+    @Column(unique = true)
+    private String cpf;
+
+    private String telefone;
 
     // Um aluno esta matriculado em um unico curso
     @ManyToOne
