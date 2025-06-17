@@ -1,5 +1,6 @@
 package dev.henrique.CadastroDeAlunos.Cursos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.henrique.CadastroDeAlunos.Alunos.AlunosModel;
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +40,7 @@ public class CursosModel {
 
     // Um curso pode ter varios alunos matriculados
     @OneToMany(mappedBy = "cursos")
+    @JsonIgnore
     private List<AlunosModel> alunos;
 
 }

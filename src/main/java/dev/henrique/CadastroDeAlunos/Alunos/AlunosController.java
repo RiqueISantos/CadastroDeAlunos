@@ -1,10 +1,18 @@
 package dev.henrique.CadastroDeAlunos.Alunos;
 
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/alunos")
 public class AlunosController {
+
+    private AlunosService alunosService;
+
+    public AlunosController(AlunosService alunosService) {
+        this.alunosService = alunosService;
+    }
 
     @GetMapping("/boasvindas")
     public String boasVindas() {
@@ -19,8 +27,8 @@ public class AlunosController {
 
     //Mostrar todos os alunos
     @GetMapping("/listar")
-    public String listarTodosOsAlunos(){
-        return "Listar aluno";
+    public List<AlunosModel> listarAlunos(){
+        return  alunosService.listarAlunos();
     }
 
     //Mostrar aluno por ID
