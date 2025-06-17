@@ -3,7 +3,7 @@ package dev.henrique.CadastroDeAlunos.Alunos;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/alunos")
 public class AlunosController {
 
     @GetMapping("/boasvindas")
@@ -18,15 +18,15 @@ public class AlunosController {
     }
 
     //Mostrar todos os alunos
-    @GetMapping("/todos")
-    public String mostrarTodosOsAlunos(){
-        return "Mostrar aluno";
+    @GetMapping("/listar")
+    public String listarTodosOsAlunos(){
+        return "Listar aluno";
     }
 
     //Mostrar aluno por ID
-    @GetMapping("/todosID")
-    public String mostrarTodosOsAlunosPorId(){
-        return "Mostrar aluno por id";
+    @GetMapping("/listarID")
+    public String listarTodosOsAlunosPorId(){
+        return "Listar aluno por id";
     }
 
     //Alterar dados dos alunos por ID
