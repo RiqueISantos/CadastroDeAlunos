@@ -32,9 +32,9 @@ public class AlunosController {
     }
 
     //Mostrar aluno por ID
-    @GetMapping("/listarID")
-    public String listarTodosOsAlunosPorId(){
-        return "Listar aluno por id";
+    @GetMapping("/listar/{id}")
+    public AlunosModel listarAlunoPorId(@PathVariable Long id){
+        return alunosService.listarAlunoPorId(id);
     }
 
     //Alterar dados dos alunos por ID
