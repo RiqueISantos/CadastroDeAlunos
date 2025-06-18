@@ -22,4 +22,8 @@ public class AlunosService {
         return alunoPorId.orElse(null);
     }
 
+    public AlunosModel criarAluno(AlunosModel aluno){
+        return alunosRepository.save(aluno);
+    }
+
 }
