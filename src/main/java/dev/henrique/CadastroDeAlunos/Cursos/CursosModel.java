@@ -38,6 +38,9 @@ public class CursosModel {
     @Column(name = "data_fim")
     private LocalDate dataFim;
 
+    @Column(name = "descricao")
+    private String descricao;
+
     // Um curso pode ter varios alunos matriculados
     @OneToMany(mappedBy = "cursos")
     @JsonIgnore

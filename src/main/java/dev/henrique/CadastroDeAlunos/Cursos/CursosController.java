@@ -15,8 +15,8 @@ public class CursosController {
 
     //Adicionar Curso
     @PostMapping("/criar")
-    public CursosModel criarCurso(@RequestBody CursosModel cursosModel){
-        return cursosService.criarCurso(cursosModel);
+    public CursosDTO criarCurso(@RequestBody CursosDTO cursosDto){
+        return cursosService.criarCurso(cursosDto);
     }
 
     //Listar cursos

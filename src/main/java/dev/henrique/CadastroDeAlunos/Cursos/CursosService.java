@@ -8,11 +8,12 @@ import java.util.Optional;
 public class CursosService {
 
     private CursosRepository cursosRepository;
+    private CursosMapper cursosMapper;
 
-    public CursosService(CursosRepository cursosRepository) {
+    public CursosService(CursosRepository cursosRepository, CursosMapper cursosMapper) {
         this.cursosRepository = cursosRepository;
+        this.cursosMapper = cursosMapper;
     }
-
 
     public List<CursosModel> listarCursos(){
         return cursosRepository.findAll();
@@ -23,8 +24,10 @@ public class CursosService {
         return cursosPorId.orElse(null);
     }
 
-    public CursosModel criarCurso(CursosModel cursosModel){
-        return cursosRepository.save(cursosModel);
+    public CursosDTO criarCurso(CursosDTO cursosDTO){
+        CursosModel cursos = cursosMapper.map(cursosDTO);
+        cursos = cursosRepository.save(cursos);
+        return cursosMapper.map(cursos);
     }
 
     public CursosModel atualizarCurso(Long id, CursosModel cursosModel){
