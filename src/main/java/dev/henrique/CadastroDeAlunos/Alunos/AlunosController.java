@@ -38,9 +38,9 @@ public class AlunosController {
     }
 
     //Alterar dados dos alunos por ID
-    @PutMapping("/alterarID")
-    public String alterarAlunoPorId(){
-        return "Alterar Aluno por ID";
+    @PutMapping("/atualizar/{id}")
+    public AlunosModel atualizarAluno(@PathVariable Long id, @RequestBody AlunosModel alunoAtualizado){
+        return alunosService.atualizarAluno(id, alunoAtualizado);
     }
 
     //Deletar aluno pelo ID

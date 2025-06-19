@@ -26,6 +26,15 @@ public class AlunosService {
         return alunosRepository.save(aluno);
     }
 
+    public AlunosModel atualizarAluno(Long id, AlunosModel alunoAtualizado){
+        if(alunosRepository.existsById(id)){
+            alunoAtualizado.setId(id);
+            return alunosRepository.save(alunoAtualizado);
+        }
+        return null;
+    }
+
+
     public void deletarAlunosPorId(Long id){
         alunosRepository.deleteById(id);
     }
