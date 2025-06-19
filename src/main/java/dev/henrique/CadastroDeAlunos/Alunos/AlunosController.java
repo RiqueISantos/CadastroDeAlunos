@@ -1,5 +1,7 @@
 package dev.henrique.CadastroDeAlunos.Alunos;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,38 +16,47 @@ public class AlunosController {
         this.alunosService = alunosService;
     }
 
-    @GetMapping("/boasvindas")
-    public String boasVindas() {
-        return "Essa é minha primeira mensagem nessa rota de cadastro";
-    }
 
-    //Adicionar Aluno
     @PostMapping("/criar")
-    public AlunosDTO criarAluno(@RequestBody AlunosDTO aluno){
-        return alunosService.criarAluno(aluno);
+    public ResponseEntity<String> criarAluno(@RequestBody AlunosDTO aluno){
+        AlunosDTO alunoDto = alunosService.criarAluno(aluno);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("O aluno: " + alunoDto.getNome() + " foi criado com sucesso!");
     }
 
-    //Mostrar todos os alunos
     @GetMapping("/listar")
-    public List<AlunosDTO> listarAlunos(){
-        return  alunosService.listarAlunos();
+    public ResponseEntity<List<AlunosDTO>> listarAlunos(){
+        List<AlunosDTO> alunos = alunosService.listarAlunos();
+        return ResponseEntity.ok(alunos);
     }
 
-    //Mostrar aluno por ID
     @GetMapping("/listar/{id}")
-    public AlunosDTO listarAlunoPorId(@PathVariable Long id){
-        return alunosService.listarAlunoPorId(id);
+    public ResponseEntity<?> listarAlunoPorId(@PathVariable Long id){
+        AlunosDTO aluno = alunosService.listarAlunoPorId(id);
+        if(aluno != null){
+            return ResponseEntity.ok(aluno);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("O aluno de ID: " + id + " não existe.");
     }
 
-    //Alterar dados dos alunos por ID
     @PutMapping("/atualizar/{id}")
-    public AlunosDTO atualizarAluno(@PathVariable Long id, @RequestBody AlunosDTO alunoAtualizado){
-        return alunosService.atualizarAluno(id, alunoAtualizado);
+    public ResponseEntity<?> atualizarAluno(@PathVariable Long id, @RequestBody AlunosDTO alunoAtualizado){
+        AlunosDTO aluno = alunosService.atualizarAluno(id, alunoAtualizado);
+        if(aluno != null){
+            return ResponseEntity.ok(aluno);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("O aluno de ID: " + id + " não existe.");
     }
 
-    //Deletar aluno pelo ID
     @DeleteMapping("/deletar/{id}")
-    public void deletarAlunoPorId(@PathVariable Long id){
-        alunosService.deletarAlunosPorId(id);
+    public ResponseEntity<String> deletarAlunoPorId(@PathVariable Long id){
+        if(alunosService.listarAlunoPorId(id) != null){
+            alunosService.deletarAlunosPorId(id);
+            return ResponseEntity.ok("O aluno de ID: " + id + " foi deletado com sucesso!");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("O ID: " + id + " não existe.");
     }
 }
