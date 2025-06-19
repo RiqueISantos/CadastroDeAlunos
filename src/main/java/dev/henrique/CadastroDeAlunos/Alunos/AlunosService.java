@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 @Service
 public class AlunosService {
 
-    private AlunosRepository alunosRepository;
-    private AlunosMapper alunosMapper;
+    private final AlunosRepository alunosRepository;
+    private final AlunosMapper alunosMapper;
 
     public AlunosService(AlunosMapper alunosMapper, AlunosRepository alunosRepository) {
         this.alunosMapper = alunosMapper;
