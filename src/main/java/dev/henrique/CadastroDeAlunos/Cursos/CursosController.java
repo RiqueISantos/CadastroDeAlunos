@@ -21,20 +21,20 @@ public class CursosController {
 
     //Listar cursos
     @GetMapping("/listar")
-    public List<CursosModel> listarCursos(){
+    public List<CursosDTO> listarCursos(){
         return cursosService.listarCursos();
     }
 
     //Mostrar curso por ID
     @GetMapping("/listar/{id}")
-    public CursosModel listarCursosPorId(@PathVariable Long id){
+    public CursosDTO listarCursosPorId(@PathVariable Long id){
         return cursosService.listarCursosPorId(id);
     }
 
     //Alterar dados dos cursos por ID
     @PutMapping("/atualizar/{id}")
-    public CursosModel alterarCurso(@PathVariable Long id, @RequestBody CursosModel cursosModel){
-        return cursosService.atualizarCurso(id, cursosModel);
+    public CursosDTO alterarCurso(@PathVariable Long id, @RequestBody CursosDTO cursosDTO){
+        return cursosService.atualizarCurso(id, cursosDTO);
     }
 
     //Deletar curso pelo ID

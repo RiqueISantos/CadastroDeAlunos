@@ -3,6 +3,7 @@ package dev.henrique.CadastroDeAlunos.Cursos;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CursosService {
@@ -15,13 +16,16 @@ public class CursosService {
         this.cursosMapper = cursosMapper;
     }
 
-    public List<CursosModel> listarCursos(){
-        return cursosRepository.findAll();
+    public List<CursosDTO> listarCursos(){
+        List<CursosModel> cursos = cursosRepository.findAll();
+        return cursos.stream()
+                .map(cursosMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public CursosModel listarCursosPorId(Long id){
+    public CursosDTO listarCursosPorId(Long id){
         Optional<CursosModel> cursosPorId = cursosRepository.findById(id);
-        return cursosPorId.orElse(null);
+        return cursosPorId.map(cursosMapper::map).orElse(null);
     }
 
     public CursosDTO criarCurso(CursosDTO cursosDTO){
@@ -30,10 +34,13 @@ public class CursosService {
         return cursosMapper.map(cursos);
     }
 
-    public CursosModel atualizarCurso(Long id, CursosModel cursosModel){
-        if(cursosRepository.existsById(id)){
-            cursosModel.setId(id);
-            return cursosRepository.save(cursosModel);
+    public CursosDTO atualizarCurso(Long id, CursosDTO cursosDto){
+        Optional<CursosModel> cursoExiste = cursosRepository.findById(id);
+        if(cursoExiste.isPresent()){
+            CursosModel cursoAtualizado = cursosMapper.map(cursosDto);
+            cursoAtualizado.setId(id);
+            CursosModel cursoSalvo = cursosRepository.save(cursoAtualizado);
+            return cursosMapper.map(cursoSalvo);
         }
         return null;
     }
