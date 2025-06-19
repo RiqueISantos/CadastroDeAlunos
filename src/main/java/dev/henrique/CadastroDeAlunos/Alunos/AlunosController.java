@@ -27,19 +27,19 @@ public class AlunosController {
 
     //Mostrar todos os alunos
     @GetMapping("/listar")
-    public List<AlunosModel> listarAlunos(){
+    public List<AlunosDTO> listarAlunos(){
         return  alunosService.listarAlunos();
     }
 
     //Mostrar aluno por ID
     @GetMapping("/listar/{id}")
-    public AlunosModel listarAlunoPorId(@PathVariable Long id){
+    public AlunosDTO listarAlunoPorId(@PathVariable Long id){
         return alunosService.listarAlunoPorId(id);
     }
 
     //Alterar dados dos alunos por ID
     @PutMapping("/atualizar/{id}")
-    public AlunosModel atualizarAluno(@PathVariable Long id, @RequestBody AlunosModel alunoAtualizado){
+    public AlunosDTO atualizarAluno(@PathVariable Long id, @RequestBody AlunosDTO alunoAtualizado){
         return alunosService.atualizarAluno(id, alunoAtualizado);
     }
 

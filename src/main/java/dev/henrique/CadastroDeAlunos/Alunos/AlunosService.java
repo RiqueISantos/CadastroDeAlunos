@@ -3,6 +3,7 @@ package dev.henrique.CadastroDeAlunos.Alunos;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AlunosService {
@@ -15,13 +16,16 @@ public class AlunosService {
         this.alunosRepository = alunosRepository;
     }
 
-    public List<AlunosModel> listarAlunos(){
-        return alunosRepository.findAll();
+    public List<AlunosDTO> listarAlunos(){
+        List<AlunosModel> aluno = alunosRepository.findAll();
+        return aluno.stream()
+                .map(alunosMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public AlunosModel listarAlunoPorId(Long id){
+    public AlunosDTO listarAlunoPorId(Long id){
         Optional<AlunosModel> alunoPorId = alunosRepository.findById(id);
-        return alunoPorId.orElse(null);
+        return alunoPorId.map(alunosMapper::map).orElse(null);
     }
 
     public AlunosDTO criarAluno(AlunosDTO alunoDto){
@@ -30,10 +34,13 @@ public class AlunosService {
         return alunosMapper.map(aluno);
     }
 
-    public AlunosModel atualizarAluno(Long id, AlunosModel alunoAtualizado){
-        if(alunosRepository.existsById(id)){
+    public AlunosDTO atualizarAluno(Long id, AlunosDTO alunoDto){
+        Optional<AlunosModel> alunoExiste = alunosRepository.findById(id);
+        if(alunoExiste.isPresent()){
+            AlunosModel alunoAtualizado = alunosMapper.map(alunoDto);
             alunoAtualizado.setId(id);
-            return alunosRepository.save(alunoAtualizado);
+            AlunosModel alunoSalvo = alunosRepository.save(alunoAtualizado);
+            return alunosMapper.map(alunoSalvo);
         }
         return null;
     }
