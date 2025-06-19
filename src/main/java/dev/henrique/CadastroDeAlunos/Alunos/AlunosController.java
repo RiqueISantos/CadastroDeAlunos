@@ -21,7 +21,7 @@ public class AlunosController {
 
     //Adicionar Aluno
     @PostMapping("/criar")
-    public AlunosModel criarAluno(@RequestBody AlunosModel aluno){
+    public AlunosDTO criarAluno(@RequestBody AlunosDTO aluno){
         return alunosService.criarAluno(aluno);
     }
 

@@ -8,8 +8,10 @@ import java.util.Optional;
 public class AlunosService {
 
     private AlunosRepository alunosRepository;
+    private AlunosMapper alunosMapper;
 
-    public AlunosService(AlunosRepository alunosRepository) {
+    public AlunosService(AlunosMapper alunosMapper, AlunosRepository alunosRepository) {
+        this.alunosMapper = alunosMapper;
         this.alunosRepository = alunosRepository;
     }
 
@@ -22,8 +24,10 @@ public class AlunosService {
         return alunoPorId.orElse(null);
     }
 
-    public AlunosModel criarAluno(AlunosModel aluno){
-        return alunosRepository.save(aluno);
+    public AlunosDTO criarAluno(AlunosDTO alunoDto){
+        AlunosModel aluno = alunosMapper.map(alunoDto);
+        aluno =  alunosRepository.save(aluno);
+        return alunosMapper.map(aluno);
     }
 
     public AlunosModel atualizarAluno(Long id, AlunosModel alunoAtualizado){
