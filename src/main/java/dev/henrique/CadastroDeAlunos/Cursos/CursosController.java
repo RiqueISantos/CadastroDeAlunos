@@ -1,38 +1,45 @@
 package dev.henrique.CadastroDeAlunos.Cursos;
 
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cursos")
 public class CursosController {
 
+    private CursosService cursosService;
+
+    public CursosController(CursosService cursosService) {
+        this.cursosService = cursosService;
+    }
+
     //Adicionar Curso
     @PostMapping("/criar")
-    public String criarCurso(){
-        return "Curso criado com sucesso";
+    public CursosModel criarCurso(@RequestBody CursosModel cursosModel){
+        return cursosService.criarCurso(cursosModel);
     }
 
     //Listar cursos
     @GetMapping("/listar")
-    public String listarCursos(){
-        return "Cursos listados com sucesso";
+    public List<CursosModel> listarCursos(){
+        return cursosService.listarCursos();
     }
 
     //Mostrar curso por ID
-    @GetMapping("/listarID")
-    public String listarTodosOsCursosPorId(){
-        return "Listar curso por id";
+    @GetMapping("/listar/{id}")
+    public CursosModel listarCursosPorId(@PathVariable Long id){
+        return cursosService.listarCursosPorId(id);
     }
 
     //Alterar dados dos cursos por ID
-    @PutMapping("/alterarID")
-    public String alterarCursoPorId(){
-        return "Alterar Curso por ID";
+    @PutMapping("/atualizar/{id}")
+    public CursosModel alterarCurso(@PathVariable Long id, @RequestBody CursosModel cursosModel){
+        return cursosService.atualizarCurso(id, cursosModel);
     }
 
     //Deletar curso pelo ID
-    @DeleteMapping("/deletarID")
-    public String deletarCursoPorId(){
-        return "Curso deletado por ID";
+    @DeleteMapping("/deletar/{id}")
+    public void deletarCursoPorId(@PathVariable Long id){
+        cursosService.deletarCursoPorId(id);
     }
 }
