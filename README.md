@@ -26,6 +26,8 @@ O sistema foi desenvolvido para gerenciar alunos e os cursos aos quais estão vi
 - **JPA (Java Persistence API)** – Mapeamento objeto-relacional (ORM).
 - **Spring Data JPA** – Facilita a comunicação com o banco de dados.
 - **Swagger** – Documentação interativa da API.
+- **Postman** – Testes manuais das rotas da API.
+- **ResponseEntity** – Padronização e controle das respostas HTTP da API.
 - **Maven** – Build e gerenciamento de dependências.
 - **Git** – Controle de versão do código-fonte.
 - **GitHub** – Hospedagem do repositório.
