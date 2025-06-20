@@ -4,6 +4,7 @@ Bem-vindo ao **Sistema de Cadastro de Alunos**!
 
 Este projeto é uma aplicação com arquitetura em camadas, desenvolvida com **Spring Boot**, que permite o cadastro de alunos e seus respectivos cursos. Utiliza o banco de dados **H2** (em memória), **Flyway** para controle de migrações, e **Swagger** para documentação e teste das APIs. Segue boas práticas de desenvolvimento, como controle de versão com **Git** e hospedagem no **GitHub**.
 
+
 ## Visão Geral do Projeto
 
 O sistema foi desenvolvido para gerenciar alunos e os cursos aos quais estão vinculados. Cada aluno pode ser associado a **um único curso**, enquanto um curso pode ter **vários alunos**. As principais funcionalidades incluem:
